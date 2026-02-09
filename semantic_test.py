@@ -17,7 +17,7 @@ def test_kubernetes_query():
 
 def test_neetcode_query():
     print("Testing Neetcode query...")
-    response = requests.get("http://localhost:8000/query?q=What is the Neetcode?")
+    response = requests.post("http://localhost:8000/query?q=What is the Neetcode?")
 
     if response.status_code != 200:
         raise Exception(f"Server returned: {response.status_code} {response.text}")
