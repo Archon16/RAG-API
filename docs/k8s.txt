@@ -1,1 +1,1 @@
-My name is modi
+Kubernetes is a container platform used to manage containers at scale.
