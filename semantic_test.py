@@ -29,4 +29,5 @@ def test_neetcode_query():
 
 if __name__ == "__main__":
     test_kubernetes_query()
+    test_neetcode_query()
     print("All semantic tests passed !!")
