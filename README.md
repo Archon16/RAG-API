@@ -33,31 +33,12 @@ This is a **Retrieval Augmented Generation (RAG) API** that:
 
 ## 🏗 High-Level Architecture
 
-Client
-↓
-FastAPI (/query)
-↓
-ChromaDB (Vector Search)
-↓
-Context + Query
-↓
-Ollama (LLM)
-↓
-Response
+<img width="886" height="429" alt="Screenshot 2026-02-10 135910" src="https://github.com/user-attachments/assets/c0fd754c-9578-4302-87e9-4d328bc4a304" />
 
 
 ### CI Flow for AI Reliability
 
-Git Push
-↓
-GitHub Actions
-↓
-Mock LLM Mode
-↓
-Semantic Tests
-↓
-Fail Build if Knowledge Quality Drops
-
+Git Push -> GitHub Actions -> Mock LLM Mode -> Semantic Tests -> Fail Build if Knowledge Quality Drops
 
 ---
 
@@ -75,18 +56,18 @@ Fail Build if Knowledge Quality Drops
 ---
 
 ## 📂 Repository Structure
-
-├── app.py
-├── embed.py
-├── docs/
-├── db/
-├── semantic_test.py
-├── Dockerfile
-├── deployment.yaml
-├── service.yaml
+```
+├── app.py                # FastAPI application
+├── embed.py              # Embedding generation logic
+├── docs/                 # Knowledge base documents
+├── db/                   # ChromaDB vector store
+├── Dockerfile            # Docker image definition
+├── deployment.yaml       # Kubernetes Deployment
+├── service.yaml          # Kubernetes Service (NodePort)
+├── semantic_test.py  # Semantic AI tests
 └── .github/workflows/
-└── ci.yaml
-
+    └── ci.yaml           # GitHub Actions CI pipeline
+```
 
 ---
 
@@ -99,65 +80,73 @@ Fail Build if Knowledge Quality Drops
 
 bash - ```ollama pull tinyllama```
 
-# Setup & Run
+## Setup & Run
 
-python -m venv venv
+```python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app:app --reload
+```
 
-# Test the API
+## Test the API
 
-POST http://127.0.0.1:8000/query?q=What is Kubernetes?
+```POST http://127.0.0.1:8000/query?q=What is Kubernetes?```
 
-# 📄 Swagger UI:
+## 📄 Swagger UI:
 
-http://127.0.0.1:8000/docs
+```http://127.0.0.1:8000/docs```
 
-# 🐳 Run with Docker
+## 🐳 Run with Docker
 
-docker build -t rag-api .
+```docker build -t rag-api .
 docker run -p 8000:8000 rag-api
+```
 
 Or pull from Docker Hub:
 
-docker pull archon16/rag-api-app:latest
+```docker pull archon16/rag-api-app:latest
 docker run -p 8000:8000 archon16/rag-api-app:latest
+```
+## ☸️ Deploy to Kubernetes (Minikube)
 
-# ☸️ Deploy to Kubernetes (Minikube)
-
-minikube start
+```minikube start
 eval $(minikube docker-env)
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+```
+### Access the service:
 
-## Access the service:
+```minikube service rag-app-service```
 
-minikube service rag-app-service
-
-# Kubernetes Features Demonstrated
+## Kubernetes Features Demonstrated
 
 Deployments & Pods
 NodePort Services
 Label selectors & traffic routing
 Self-healing (ReplicaSet recreation)
 
-# 🔁 CI/CD for AI Systems (Key Highlight)
+## 🔁 CI/CD for AI Systems (Key Highlight)
 
-## Problem
+### Problem
 LLM outputs are non-deterministic, causing flaky CI tests.
 
-## Solution Implemented
+### Solution Implemented
 - Added Mock LLM Mode for CI
 - Semantic tests validate meaning, not exact text
 - CI fails when required concepts are missing from the knowledge base
 - This ensures bad data never reaches production.
+```
+Git Push → GitHub Actions
+         → Mock LLM Mode
+         → Semantic Tests
+         → Pass/Fail on data quality
+```
 
-# 🧪 Semantic Testing Example
+## 🧪 Semantic Testing Example
 ✔ Response contains required concept: "orchestration"
 ✖ Fail build if missing
 
-# 📌 Key Learnings
+## 📌 Key Learnings
 
 - Designing RAG systems end-to-end
 - Making AI systems testable in CI pipelines
