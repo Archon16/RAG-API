@@ -1,21 +1,16 @@
-# 🚀 RAG API – Production-Grade DevOps & AI Project
+# 🚀 RAG API – Production-Grade DevOps*AI Project
 
 > **A real-world Retrieval Augmented Generation (RAG) API built with production DevOps practices**  
 > Covers API design, vector databases, containerization, Kubernetes deployment, and CI pipelines for AI systems.
 
 ---
 
-## 🔥 Why This Project Stands Out
-
-Most AI demos stop at *“it works locally.”*  
-This project goes further and focuses on **production concerns**:
+## 🔥 Project Outline
 
 - ✅ Deterministic CI testing for non-deterministic LLM outputs  
 - ✅ Containerized AI workloads using Docker  
 - ✅ Kubernetes deployment with self-healing and service networking  
 - ✅ CI pipelines that protect **data quality**, not just code quality  
-
-This mirrors how **real companies ship AI-backed APIs**.
 
 ---
 
@@ -120,12 +115,12 @@ kubectl apply -f service.yaml
 
 ## Kubernetes Features Demonstrated
 
-Deployments & Pods
-NodePort Services
-Label selectors & traffic routing
-Self-healing (ReplicaSet recreation)
+- Deployments & Pods
+- NodePort Services
+- Label selectors & traffic routing
+- Self-healing (ReplicaSet recreation)
 
-## 🔁 CI/CD for AI Systems (Key Highlight)
+## 🔁 CI/CD 
 
 ### Problem
 LLM outputs are non-deterministic, causing flaky CI tests.
